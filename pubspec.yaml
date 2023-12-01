@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  fade_out_particle: ^1.2.1
   flutter_svg:
   rxdart: ^0.27.5
   smooth_page_indicator: ^1.1.0
@@ -53,5 +54,5 @@ flutter:
         - asset: lib/assets/fonts/inter/Inter-SemiBoldItalic.otf
         - asset: lib/assets/fonts/inter/Inter-Thin.otf
         - asset: lib/assets/fonts/inter/Inter-ThinItalic.otf
-        - asset: lib/assets/fonts/inter/Inter-V.otf
+        - asset: lib/assets/fonts/inter/Inter-V.ttf
 

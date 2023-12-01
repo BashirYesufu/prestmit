@@ -10,5 +10,9 @@ class ImagePath {
   static const String bell = "$_imageDir/bell.svg";
   static const String lines = "$_imageDir/lines.png";
   static const String google = "$_imageDir/google.svg";
+  static const String home = "$_imageDir/home.svg";
+  static const String receipt = "$_imageDir/receipt.svg";
+  static const String send = "$_imageDir/send.svg";
+  static const String settings = "$_imageDir/settings.svg";
 
 }
