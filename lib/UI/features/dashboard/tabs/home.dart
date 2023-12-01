@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:prestmit/UI/bloc/bike_bloc.dart';
 import 'package:prestmit/UI/features/tracking/tracking_details.dart';
 import 'package:prestmit/UI/widgets/input_field.dart';
 import 'package:prestmit/UI/widgets/primary_button.dart';
-import 'package:prestmit/UI/widgets/secondary_button.dart';
 import 'package:prestmit/constants/color_path.dart';
 import 'package:prestmit/constants/image_path.dart';
 import 'package:prestmit/constants/text_styles.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +19,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  PageController controller = PageController(viewportFraction: 1, keepPage: true);
+  final BikeBloc _bikeBloc = BikeBloc();
+
+  @override
+  void initState() {
+    _bikeBloc.getBikes();
+
+    _bikeBloc.bikeResponse.listen((event) {
+      print(event);
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +69,60 @@ class _HomeState extends State<Home> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
+                  SizedBox(height: 30),
+                  StreamBuilder<List<String>>(
+                    stream: _bikeBloc.bikeResponse,
+                    builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                      if (snapshot.hasData && snapshot.data != null) {
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 265,
+                              child: ListView.builder(
+                                  controller: controller,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) => Container(
+                                    width: 255,
+                                    height: 265,
+                                    margin: EdgeInsets.symmetric(horizontal: 20),
+                                    padding: EdgeInsets.all(40),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: ColorPath.card,
+                                    ),
+                                    child: Image.asset(ImagePath.bike),
+                                  ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            SmoothPageIndicator(
+                              controller: controller,
+                              count: snapshot.data!.length,
+                              axisDirection: Axis.horizontal,
+                              onDotClicked: (index) => controller.jumpToPage(index),
+                              effect: ExpandingDotsEffect(
+                                  activeDotColor: Colors.black,
+                                  dotColor: ColorPath.card,
+                                  dotWidth: 6,
+                                  dotHeight: 6
+                              ),
+                            )
+                          ],
+                        );
+                      }
+                      else {
+                        return SizedBox(
+                          height: 265,
+                          child: Center(
+                            child: CupertinoActivityIndicator(
+                              color: ColorPath.yellow,
+                            )
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(height: 30),
                   Container(
                     height: 109,
                     color: ColorPath.yellow,
@@ -101,7 +170,7 @@ class _HomeState extends State<Home> {
                                       hintText: 'Enter the receipt number',
                                     ),
                                     PrimaryButton(
-                                      onTap:()=> Navigator.of(context).pushReplacementNamed(TrackingDetails.routeName),
+                                      onTap:()=> Navigator.of(context).pushNamed(TrackingDetails.routeName),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                                         child: Row(

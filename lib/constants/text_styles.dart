@@ -16,5 +16,12 @@ class AppTextStyles {
       fontWeight: weight,
       fontFamily: FontPath.inter
   );
+
+  static TextStyle black(double size, {FontWeight weight = FontWeight.normal}) => TextStyle(
+      color: Colors.black,
+      fontSize: size,
+      fontWeight: weight,
+      fontFamily: FontPath.inter
+  );
 }
 
