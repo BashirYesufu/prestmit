@@ -1,8 +1,7 @@
 import 'package:fade_out_particle/fade_out_particle.dart';
 import 'package:flutter/material.dart';
 import 'package:prestmit/constants/color_path.dart';
-
-import '../dashboard/landing.dart';
+import '../auth/auth.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -35,7 +34,7 @@ class _SplashState extends State<Splash> {
                 ),
               ),
               onAnimationEnd: (){
-                Navigator.of(context).pushReplacementNamed(LandingTab.routeName);
+                Navigator.of(context).pushReplacementNamed(Auth.routeName);
               },
             ),
           )

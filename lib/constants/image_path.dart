@@ -14,5 +14,9 @@ class ImagePath {
   static const String receipt = "$_imageDir/receipt.svg";
   static const String send = "$_imageDir/send.svg";
   static const String settings = "$_imageDir/settings.svg";
+  // static const String avatar = "$_imageDir/avatar.svg";
+  static const String avatar = "$_imageDir/avatar.png";
+  static const String map = "$_imageDir/map.svg";
+  static const String polyline = "$_imageDir/polyline.svg";
 
 }
