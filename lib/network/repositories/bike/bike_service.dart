@@ -6,7 +6,7 @@ class BikeService {
   Future<List<String>> getBikes() async {
     var completer = Completer<List<String>>();
     try {
-      await Future.delayed(Duration(seconds: 4));
+      await Future.delayed(Duration(seconds: 3));
       List<String> response = [];
       for (var i = 0; i < 10; i++) {
         response.add(ImagePath.bike);

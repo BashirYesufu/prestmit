@@ -81,6 +81,8 @@ class _HomeState extends State<Home> {
                               child: ListView.builder(
                                   controller: controller,
                                   scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: snapshot.data?.length,
                                   itemBuilder: (context, index) => Container(
                                     width: 255,
                                     height: 265,
@@ -115,7 +117,7 @@ class _HomeState extends State<Home> {
                           height: 265,
                           child: Center(
                             child: CupertinoActivityIndicator(
-                              color: ColorPath.yellow,
+                              color: Colors.black,
                             )
                           ),
                         );
