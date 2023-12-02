@@ -23,5 +23,19 @@ class AppTextStyles {
       fontWeight: weight,
       fontFamily: FontPath.inter
   );
+
+  static TextStyle white(double size, {FontWeight weight = FontWeight.normal}) => TextStyle(
+      color: Colors.white,
+      fontSize: size,
+      fontWeight: weight,
+      fontFamily: FontPath.inter
+  );
+
+  static TextStyle grey(double size, {FontWeight weight = FontWeight.normal}) => TextStyle(
+      color: ColorPath.greyText,
+      fontSize: size,
+      fontWeight: weight,
+      fontFamily: FontPath.inter
+  );
 }
 

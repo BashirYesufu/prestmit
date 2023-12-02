@@ -3,7 +3,8 @@ class ImagePath {
   static const String _imageDir = "lib/assets/images";
   // static const String bike = "$_imageDir/bike.svg";
   static const String bike = "$_imageDir/bike.png";
-  static const String biker = "$_imageDir/biker.svg";
+  // static const String biker = "$_imageDir/biker.svg";
+  static const String biker = "$_imageDir/biker.png";
   static const String box = "$_imageDir/box.svg";
   static const String mailbox = "$_imageDir/mailbox.svg";
   static const String package = "$_imageDir/package.svg";

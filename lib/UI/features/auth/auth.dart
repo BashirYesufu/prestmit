@@ -4,6 +4,7 @@ import 'package:prestmit/UI/features/dashboard/landing.dart';
 import 'package:prestmit/UI/widgets/primary_button.dart';
 import 'package:prestmit/constants/color_path.dart';
 import 'package:prestmit/constants/image_path.dart';
+import 'package:prestmit/constants/text_styles.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -38,43 +39,78 @@ class _AuthState extends State<Auth> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(ImagePath.box),
-                Text('Welcome to E-Bikes'),
-                Text('Buying Electric bikes just got a lot easier, Try us today.'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 4,
-                      backgroundColor: ColorPath.lightBlack,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: CircleAvatar(
-                        radius: 4,
-                        backgroundColor: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0, bottom: 50.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Welcome to E-Bikes', style: AppTextStyles.black(24, weight: FontWeight.w600),),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        child: Text(
+                          'Buying Electric bikes just got a lot easier, Try us today.',
+                          style: AppTextStyles.grey(14),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                    CircleAvatar(
-                      radius: 4,
-                      backgroundColor: Colors.white,
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 4,
+                            backgroundColor: ColorPath.lightBlack,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Colors.white,
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 4,
+                            backgroundColor: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 PrimaryButton(
-                  label: 'Login with google',
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 16,
+                            backgroundColor: Colors.white,
+                            child: SvgPicture.asset(ImagePath.google),
+                          ),
+                        ],
+                      ),
+                      Text('Login with google', style: AppTextStyles.white(14, weight: FontWeight.w500),)
+                    ],
+                  ),
                   onTap: ()=> Navigator.pushReplacementNamed(context, LandingTab.routeName),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Don’t have any account?'),
-                    Text('Sign Up'),
-                  ],
                 ),
               ],
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 30.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Don’t have any account?'),
+              SizedBox(width: 10),
+              Text('Sign Up', style: AppTextStyles.black(14, weight: FontWeight.w600),),
+            ],
+          ),
+        ),
       ),
     );
   }

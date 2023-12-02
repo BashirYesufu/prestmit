@@ -26,16 +26,13 @@ class _HomeState extends State<Home> {
   void initState() {
     _bikeBloc.getBikes();
 
-    _bikeBloc.bikeResponse.listen((event) {
-      print(event);
-    });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -66,6 +63,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(top: 30.0),
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -127,7 +125,43 @@ class _HomeState extends State<Home> {
                   SizedBox(height: 30),
                   Container(
                     height: 109,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     color: ColorPath.yellow,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Gotten your\nE-Bike yet?',
+                          style: AppTextStyles.grey(14),
+                        ),
+                        SizedBox(
+                          width: 183,
+                          child: PrimaryButton(
+                            onTap:()=> Navigator.of(context).pushNamed(TrackingDetails.routeName),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Your Orders', style: AppTextStyles.generic(size: 14, weight: FontWeight.w600, color: Colors.white),),
+                                Icon(Icons.arrow_forward, color: Colors.white,)
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(ImagePath.biker, height: 161, width: 161,),
+                        Text(
+                          'You too can join our\nElite squad of E-bikers',
+                          style: AppTextStyles.grey(14),
+                        ),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -157,7 +191,7 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
+                                padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 30),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -166,8 +200,10 @@ class _HomeState extends State<Home> {
                                       style: AppTextStyles.generic(size: 18, weight: FontWeight.w700, color: ColorPath.lightBlack),
                                     ),
                                     Text(
-                                     'Enter the receipt number that has been given by the officer',
+                                     'Enter the receipt number that has\nbeen given by the officer',
+                                      style: AppTextStyles.grey(14),
                                     ),
+                                    SizedBox(height: 50),
                                     InputField(
                                       hintText: 'Enter the receipt number',
                                     ),
@@ -193,6 +229,30 @@ class _HomeState extends State<Home> {
 
                       ],
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Tracking history', style: AppTextStyles.black(16, weight: FontWeight.w600),),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildHistory(
+                                icon: '📦',
+                                title: 'SCP9374826473',
+                                subTitle: 'In the process',
+                            ),
+                            buildHistory(
+                              icon: '🚚',
+                              title: 'SCP6653728497',
+                              subTitle: 'In delivery',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -210,6 +270,47 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildHistory({required String icon, required String title, required String subTitle}) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: ColorPath.card,
+                child: Text(
+                  icon,
+                  style: AppTextStyles.black(30),
+                ),
+              ),
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyles.black(14, weight: FontWeight.w500),
+                  ),
+                  Text(
+                    subTitle,
+                    style: AppTextStyles.grey(
+                      14,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          Icon(Icons.arrow_forward_ios)
         ],
       ),
     );
